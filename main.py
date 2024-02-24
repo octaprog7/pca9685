@@ -40,3 +40,46 @@ if __name__ == '__main__':
     # если у вас при controller[номер_канала] = 0 СИД этого канала горит ярко, то измените параметр
     # inverted в вызове configure_led_out
     controller.configure_led_out(inverted=True, open_drain=True)
+
+    controller[None] = 0
+
+    _max = len(controller)
+    _time_step = 1000
+
+    # Демка при подключенных 16-ти СИД с общим АНОДОМ(!)
+    print("---Cтупенчатое увеличение яркости всех СИД---")
+    for i in range(_max):
+        pwm = int(100 * (i) / _max)
+        controller[None] = pwm
+        print(f"ШИМ [%]: {pwm}")
+        time.sleep_ms(_time_step)
+    #
+    controller[None] = False  # гашу все СИД
+    print("---Включаю СИД через один---")
+    for _ in range(_max):
+        for index in range(0, _max, 2):
+            controller[index] = True  # горят четные СИД
+        time.sleep_ms(_time_step)
+        controller[None] = False  # гашу все СИД
+        for index in range(1, _max, 2):
+            controller[index] = True  # горят НЕчетные СИД
+        time.sleep_ms(_time_step)
+        controller[None] = False  # гашу все СИД
+
+    old_index = -1
+    print("---Бегущий огонь---")
+    for index in range(_max):
+        if old_index >= 0:
+            controller[old_index] = False
+        controller[index] = True
+        old_index = index
+        time.sleep_ms(_time_step)
+
+    for index in range(_max - 1, 0, -1):
+        if old_index >= 0:
+            controller[old_index] = False
+        controller[index] = True
+        old_index = index
+        time.sleep_ms(_time_step)
+
+    controller[None] = False  # гашу все СИД

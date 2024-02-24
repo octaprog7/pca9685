@@ -53,3 +53,6 @@ ESP или любой другой с залитой прошивкой MicroPyt
 ![alt text](https://github.com/octaprog7/pca9685/blob/master/pics/ide_pca9685.png)
 # Адресация выходов ШИМ с помощью средств MicroPython
 ![alt text](https://github.com/octaprog7/pca9685/blob/master/pics/channels_access.png)
+
+# Видео
+[Демо видео](https://youtu.be/RDoE17OjMUU)
