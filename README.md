@@ -56,3 +56,5 @@ ESP или любой другой с залитой прошивкой MicroPyt
 
 # Видео
 [Демо видео](https://youtu.be/RDoE17OjMUU)
+## 8 bit led bar
+![alt text](https://github.com/octaprog7/pca9685/blob/master/pics/8bit_led_bar.png)
